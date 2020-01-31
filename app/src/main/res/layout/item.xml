@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardUseCompatPadding="true"
+    android:layout_margin="4dp"
+    >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            >
+            <ImageView
+                android:id="@+id/imgView"
+                android:layout_width="120dp"
+                android:layout_height="180dp"
+                android:scaleType="centerCrop"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                 />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginLeft="16dp"
+                android:layout_alignTop="@id/imgView"
+                android:layout_toRightOf="@id/imgView"
+                android:layout_toEndOf="@id/imgView"
+                >
+                <TextView
+                    android:id="@+id/name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="20sp"
+                    android:padding="2dp"
+                    android:maxLines="1"
+                    android:textColor="#000080"
+                    android:ellipsize="end"
+                    android:text="Name" />
+
+                <TextView
+                    android:id="@+id/desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="15sp"
+                    android:padding="2dp"
+                    android:maxLines="1"
+                    android:textColor="#000080"
+                    android:ellipsize="end"
+                    android:text="Name" />
+
+                <androidx.appcompat.widget.AppCompatRatingBar
+                    android:id="@+id/rt"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="10"
+                    android:rating="2.5"
+                    android:theme="@style/RatingBar"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:stepSize="0.1" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_change_settings">Ubah Bahasa</string>
+    <string name="sinopsis" tools:ignore="MissingTranslation">Sinopsis</string>
+    <string name="job" translatable="false">Sutradara</string>
+    <string name="movies1" tools:ignore="MissingTranslation">Film</string>
+    <string name="tv1" tools:ignore="MissingTranslation">Acara Tv</string>
+    <string name="language" tools:ignore="MissingTranslation">id-ID</string>
+</resources>

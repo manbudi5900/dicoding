@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2" xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_change_settings">Setting Language</string>
+    <string name="sinopsis" tools:ignore="MissingTranslation">Synopsis</string>
+    <string name="job">Director</string>
+    <string name="movies1" tools:ignore="MissingTranslation">Movies</string>
+    <string name="tv1" tools:ignore="MissingTranslation">Tv Show</string>
+    <string name="language" tools:ignore="MissingTranslation">en-US</string>
+</resources>
