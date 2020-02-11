@@ -5,6 +5,7 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class Tv (
+    var id: Int?=null,
     @SerializedName("original_name") var original_title: String? = null,
     var poster_path: String? = null,
     var overview: String? = null,
@@ -14,6 +15,7 @@ data class Tv (
 
 ): Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -24,6 +26,7 @@ data class Tv (
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        id?.let { parcel.writeInt(it) }
         parcel.writeString(original_title)
         parcel.writeString(poster_path)
         parcel.writeString(overview)

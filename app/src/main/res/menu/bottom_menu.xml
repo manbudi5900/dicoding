@@ -8,4 +8,12 @@
         android:id="@+id/tv"
         android:icon="@drawable/ic_tv_black_24dp"
         android:title="@string/tv1" />
+    <item
+        android:id="@+id/fmovies"
+        android:icon="@drawable/movie"
+        android:title="@string/fmovies1" />
+    <item
+        android:id="@+id/ftv"
+        android:icon="@drawable/ic_tv_black_24dp"
+        android:title="@string/ftv1" />
 </menu>

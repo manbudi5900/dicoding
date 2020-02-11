@@ -5,16 +5,17 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 data class Film (
+    var id: Int?=null,
     var original_title: String? = null,
     var poster_path: String? = null,
     var overview: String? = null,
     var release_date: String? = null,
-
     var backdrop_path: String?=null,
     var vote_average: Double?=null
 
 ): Parcelable {
     constructor(parcel: Parcel) : this(
+        parcel.readInt(),
         parcel.readString(),
         parcel.readString(),
         parcel.readString(),
@@ -25,6 +26,7 @@ data class Film (
     )
 
     override fun writeToParcel(parcel: Parcel, flags: Int) {
+        id?.let { parcel.writeInt(it) }
         parcel.writeString(original_title)
         parcel.writeString(poster_path)
         parcel.writeString(overview)

@@ -1,35 +1,23 @@
 package com.example.dicoding.Adapter
 
-import android.annotation.SuppressLint
-import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-
-import kotlinx.android.synthetic.main.item.view.*
-import android.net.Uri
-import android.util.Log
-import android.widget.*
-import androidx.appcompat.widget.AppCompatRatingBar
-import androidx.core.content.ContextCompat.startActivity
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dicoding.Detail
 import com.example.dicoding.Model.Film
 import com.example.dicoding.Model.Tv
 import com.example.dicoding.R
-import kotlinx.android.synthetic.main.activity_utama__nav.progress_bar
-import kotlinx.android.synthetic.main.activity_utama__nav.view.*
+import kotlinx.android.synthetic.main.item.view.*
 
-
-//class CustomAdapter(private val film: ArrayList<Film>): RecyclerView.Adapter<CustomAdapter.Holder>() {
-class CustomAdapter(): RecyclerView.Adapter<CustomAdapter.Holder>() {
-    private val film = ArrayList<Film>()
+class CustomAdapterTvFavofite(): RecyclerView.Adapter<CustomAdapterTvFavofite.Holder>() {
+    private val film = ArrayList<Tv>()
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false))
     }
-    fun setData(items: ArrayList<Film>){
+    fun setData(items: ArrayList<Tv>){
         film.clear()
         film.addAll(items)
         notifyDataSetChanged()
@@ -49,9 +37,8 @@ class CustomAdapter(): RecyclerView.Adapter<CustomAdapter.Holder>() {
 
         film.get(position).vote_average?.toFloat()?.let { holder.view.rt.setRating(it) }
         holder.view.setOnClickListener{
-//            Toast.makeText(holder.view.context, film?.get(position)?.menit, Toast.LENGTH_SHORT).show()
             val film = Film(
-                position,
+                film.get(position).id,
                 film.get(position).original_title,
                 film.get(position).poster_path,
                 film.get(position).overview,
@@ -61,8 +48,7 @@ class CustomAdapter(): RecyclerView.Adapter<CustomAdapter.Holder>() {
             )
             val moveWithObjectIntent = Intent(holder.view.context, Detail::class.java)
             moveWithObjectIntent.putExtra(Detail.EXTRA_PERSON, film)
-            moveWithObjectIntent.putExtra("id", position)
-            moveWithObjectIntent.putExtra("jenis", "movie")
+            moveWithObjectIntent.putExtra("jenis", "tv")
             holder.view.context.startActivity(moveWithObjectIntent)
         }
 
@@ -73,4 +59,3 @@ class CustomAdapter(): RecyclerView.Adapter<CustomAdapter.Holder>() {
 
 
 }
-

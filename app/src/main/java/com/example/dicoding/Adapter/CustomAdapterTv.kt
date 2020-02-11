@@ -39,6 +39,7 @@ class CustomAdapterTv(): RecyclerView.Adapter<CustomAdapterTv.Holder>() {
         holder.view.setOnClickListener{
             //            Toast.makeText(holder.view.context, film?.get(position)?.menit, Toast.LENGTH_SHORT).show()
             val film = Film(
+                position,
                 film.get(position).original_title,
                 film.get(position).poster_path,
                 film.get(position).overview,
@@ -48,6 +49,8 @@ class CustomAdapterTv(): RecyclerView.Adapter<CustomAdapterTv.Holder>() {
             )
             val moveWithObjectIntent = Intent(holder.view.context, Detail::class.java)
             moveWithObjectIntent.putExtra(Detail.EXTRA_PERSON, film)
+            moveWithObjectIntent.putExtra("id", position)
+            moveWithObjectIntent.putExtra("jenis", "tv")
             holder.view.context.startActivity(moveWithObjectIntent)
         }
 

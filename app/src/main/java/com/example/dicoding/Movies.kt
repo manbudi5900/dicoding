@@ -40,17 +40,6 @@ class Movies : Fragment() {
     private lateinit var mainViewModel: MainViewModel
     private lateinit var movieAdapter: CustomAdapter
 
-    private val genre = arrayOf(
-        "Action",
-        "Action",
-        "Adventure",
-        "Adventure",
-        "Petualangan",
-        "Action",
-        "Action",
-        "Animation",
-        "Komedi",
-        "Horor")
 
 
 

@@ -1,42 +1,37 @@
 package com.example.dicoding
 
-import android.content.ContentValues
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dicoding.Adapter.CustomAdapter
 import com.example.dicoding.Adapter.CustomAdapterTv
-import com.example.dicoding.Api.APIServices
-import com.example.dicoding.Api.DataRepository
-import com.example.dicoding.Model.Film
 import com.example.dicoding.Model.MainViewModel
-import com.example.dicoding.Model.ResponseFilm
+import com.example.dicoding.Model.Tv
+import com.example.dicoding.db.DatabaseTV
 import kotlinx.android.synthetic.main.coba.*
-import retrofit2.Call
-import retrofit2.Response
 
-class Tv_Show : Fragment() {
-    private lateinit var mainViewModel: MainViewModel
+class FavoriteTv : Fragment() {
     private lateinit var movieAdapter: CustomAdapterTv
+    private lateinit var mainViewModel: MainViewModel
+    private lateinit var  TvArrayList: ArrayList<Tv>
+    private lateinit var databaseHelper: DatabaseTV
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
         inflater.inflate(R.layout.coba, container, false)
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        ShowProgressDialog(true)
         movieAdapter = CustomAdapterTv()
         movieAdapter.notifyDataSetChanged()
+        databaseHelper = this.context?.let { DatabaseTV(it) }!!
         mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
-        mainViewModel.setTVShows(getString(R.string.language))
+        TvArrayList = databaseHelper!!.getAllTv
+        mainViewModel.setTv(TvArrayList)
         list.setHasFixedSize(true)
         list.layoutManager = LinearLayoutManager(this.context)
         list.adapter = movieAdapter
@@ -48,8 +43,6 @@ class Tv_Show : Fragment() {
                 ShowProgressDialog(false)
             }
         })
-
-
     }
     fun ShowProgressDialog(state: Boolean){
         if(state){
@@ -59,5 +52,4 @@ class Tv_Show : Fragment() {
             progress_bar.visibility= View.GONE
         }
     }
-
 }

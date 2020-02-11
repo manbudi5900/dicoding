@@ -11,8 +11,8 @@ import retrofit2.Call
 import retrofit2.Response
 
 class MainViewModel: ViewModel() {
-    private val listMovie =  MutableLiveData<ArrayList<Film>>()
-    private val listTV =  MutableLiveData<ArrayList<Tv>>()
+    private var listMovie =  MutableLiveData<ArrayList<Film>>()
+    private var listTV =  MutableLiveData<ArrayList<Tv>>()
     val apiInterface : APIServices = DataRepository.getClient().create(APIServices::class.java)
 
     fun setMovies(lang: String){
@@ -48,6 +48,12 @@ class MainViewModel: ViewModel() {
                 }
             }
         })
+    }
+    fun setMovies(list: ArrayList<Film>?){
+        listMovie.postValue(list)
+    }
+    fun setTv(list: ArrayList<Tv>?){
+        listTV.postValue(list)
     }
 
     fun getMovies(): LiveData<ArrayList<Film>>{

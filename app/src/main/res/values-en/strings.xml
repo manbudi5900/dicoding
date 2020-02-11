@@ -6,4 +6,6 @@
     <string name="movies1" tools:ignore="MissingTranslation">Movies</string>
     <string name="tv1" tools:ignore="MissingTranslation">Tv Show</string>
     <string name="language" tools:ignore="MissingTranslation">en-US</string>
+    <string name="fmovies1" tools:ignore="MissingTranslation">Favorite Movies</string>
+    <string name="ftv1" tools:ignore="MissingTranslation">Favorite Tv Show</string>
 </resources>
