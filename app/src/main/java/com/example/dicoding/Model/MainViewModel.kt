@@ -31,6 +31,27 @@ class MainViewModel: ViewModel() {
             }
         })
     }
+    fun setMovies(lang: String,query:String){
+        val dataMovie = ArrayList<Film>()
+        val call : Call<ResponseFilm> = apiInterface.getMovies("7b3ad7574fb018c27ba6b1ec6da5c6e0",lang,query)
+        call.enqueue(object : retrofit2.Callback<ResponseFilm> {
+            override fun onFailure(call: Call<ResponseFilm>, t: Throwable) {
+                Log.d("${ContentValues.TAG}", "Gagal Fetch Popular Movie")
+            }
+            override fun onResponse(call: Call<ResponseFilm>, response: Response<ResponseFilm>) {
+                Log.d("${ContentValues.TAG}", "Berhasil Fetch Popular Movie")
+                if (response != null) {
+                    val data = response.body()
+                    if (data != null) {
+                        Log.d("${ContentValues.TAG}", data.results.toString())
+                        dataMovie.addAll(data!!.results)
+                        listMovie.postValue(dataMovie)
+                    }
+
+                }
+            }
+        })
+    }
 
     fun setTVShows(lang: String){
         val dataTv = ArrayList<Tv>()
@@ -45,6 +66,26 @@ class MainViewModel: ViewModel() {
                     Log.d("ResponeLog", data!!.toString())
                     dataTv.addAll(data!!.results)
                     listTV.postValue(dataTv)
+                }
+            }
+        })
+    }
+    fun setTVShows(lang: String,query:String){
+        val dataTv = ArrayList<Tv>()
+        val call : Call<ResponseTv> = apiInterface.getTv("7b3ad7574fb018c27ba6b1ec6da5c6e0",lang,query)
+        call.enqueue(object : retrofit2.Callback<ResponseTv> {
+            override fun onFailure(call: Call<ResponseTv>, t: Throwable) {
+                Log.d("${ContentValues.TAG}", "Gagal Fetch Popular Movie")
+            }
+            override fun onResponse(call: Call<ResponseTv>, response: Response<ResponseTv>) {
+                if (response != null) {
+                    val data = response.body()
+                    if (data != null) {
+                        Log.d("ResponeLog", data!!.toString())
+                        dataTv.addAll(data!!.results)
+                        listTV.postValue(dataTv)
+                    }
+
                 }
             }
         })

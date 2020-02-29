@@ -8,32 +8,30 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.HandlerThread
-import android.widget.Toast
-import com.bumptech.glide.Glide
-import com.example.dicoding.Model.Film
-import kotlinx.android.synthetic.main.detail_coba.*
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.example.dicoding.Model.Film
+import com.example.dicoding.Model.Tv
 import com.example.dicoding.db.DatabaseContract
-import com.example.dicoding.db.DatabaseContract.MoviesColumn.Companion.CONTENT_URI
-import com.example.dicoding.db.MappingMoviesHelper
-import com.example.dicoding.db.MoviesHelper
+import com.example.dicoding.db.MappingTvshowsHelper
+import com.example.dicoding.db.TvshowsHelper
+import kotlinx.android.synthetic.main.detail_coba.*
 
-
-class Detail : AppCompatActivity() {
-
+class DetailTV : AppCompatActivity() {
     var jenis: String? = null
-    var film : Film?= null
-    var film1 : Film?= null
+    var film : Tv?= null
+    var film1 : Tv?= null
     var itm : Menu?=null
     var id : Int?=null
-    var mv = MoviesHelper
+    private lateinit var mv: TvshowsHelper
     private lateinit var uriWithId: Uri
     companion object {
-        const val OBJECT_MOVIE = "object_movie"
+        const val OBJECT_TVSHOW = "object_tv"
         const val EXTRA_POSITION = "extra_position"
         const val REQUEST_ADD = 100
         const val RESULT_ADD = 101
@@ -44,11 +42,12 @@ class Detail : AppCompatActivity() {
         const val ALERT_DIALOG_DELETE = 20
     }
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.detail_coba)
-        film = intent.getParcelableExtra(EXTRA_POSITION)
+        mv = TvshowsHelper.getInstance(applicationContext)
+        mv.open()
+        film = intent.getParcelableExtra(OBJECT_TVSHOW) as Tv
         id = film?.id
         jenis = intent.getStringExtra("jenis")
 //        Log.d("id",id.toString())
@@ -67,25 +66,7 @@ class Detail : AppCompatActivity() {
         textView8.setText("Animation")
         rate.setText(film?.vote_average.toString())
         sinopsis.setText(resources.getString(R.string.sinopsis))
-        val handlerThread = HandlerThread("DataObserver")
-        handlerThread.start()
-        val handler = Handler(handlerThread.looper)
-        val myObserver = object : ContentObserver(handler) {
-            override fun onChange(self: Boolean) {
-                runOnUiThread {
-                    film1 = loadDBSync(film?.id.toString())
-                }
-            }
-        }
-
-        contentResolver?.registerContentObserver(
-            CONTENT_URI,
-            true,
-            myObserver
-        )
         film1 = loadDBSync(film?.id.toString())
-
-
         Toast.makeText(this,id.toString(), Toast.LENGTH_SHORT).show()
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -93,16 +74,15 @@ class Detail : AppCompatActivity() {
         return super.onCreateOptionsMenu(menu)
 
     }
-    private fun loadDBSync(id: String?): Film {
-        uriWithId = Uri.parse("$CONTENT_URI/$id")
-        val cursor = contentResolver.query(uriWithId, null, null, null, null)
+    private fun loadDBSync(id: String?): Tv {
+        val cursor = mv.queryById(id)
 
-        return MappingMoviesHelper.mapCursorToList(cursor)
+        return MappingTvshowsHelper.mapCursorToList(cursor)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu?): Boolean {
-        Log.d("hello",mv.getInstance(this@Detail).getId(film?.id.toString()).toString())
-        if (mv.getInstance(this@Detail).getId(film?.id.toString())>=1){
+        Log.d("hello",mv.getId(film?.id.toString()).toString())
+        if (mv.getId(film?.id.toString())>=1){
             if (menu != null) {
                 menu.findItem(R.id.love)?.icon =
                     ContextCompat.getDrawable(this, R.drawable.favorite)
@@ -117,28 +97,28 @@ class Detail : AppCompatActivity() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (mv.getInstance(this@Detail).getId(film?.id.toString())<=0){
+        if (item.itemId == R.id.love) {
             val values = ContentValues()
-            values.put(DatabaseContract.MoviesColumn.ID, film?.id.toString())
-            values.put(DatabaseContract.MoviesColumn.TITLE, film?.original_title)
-            values.put(DatabaseContract.MoviesColumn.PHOTO, film?.poster_path)
-            values.put(DatabaseContract.MoviesColumn.DESCRIPTION, film?.overview)
-            values.put(DatabaseContract.MoviesColumn.RELEASE, film?.release_date)
-            values.put(DatabaseContract.MoviesColumn.BACK, film?.backdrop_path)
-            values.put(DatabaseContract.MoviesColumn.RATING, film?.vote_average)
-            val result = contentResolver.insert(CONTENT_URI, values)
-            if (result?.lastPathSegment?.toInt() != null) {
-                setResult(RESULT_ADD, intent)
+            values.put(DatabaseContract.TvshowsColumn.ID, film?.id.toString())
+            values.put(DatabaseContract.TvshowsColumn.TITLE, film?.original_title)
+            values.put(DatabaseContract.TvshowsColumn.PHOTO, film?.poster_path)
+            values.put(DatabaseContract.TvshowsColumn.DESCRIPTION, film?.overview)
+            values.put(DatabaseContract.TvshowsColumn.RELEASE, film?.release_date)
+            values.put(DatabaseContract.TvshowsColumn.BACK, film?.backdrop_path)
+            values.put(DatabaseContract.TvshowsColumn.RATING, film?.vote_average)
+            val result = mv.insert(values)
+            if (result > 0) {
+                setResult(DetailTV.RESULT_ADD, intent)
                 Toast.makeText(
-                    this@Detail,
+                    this@DetailTV,
                     "Favorite: " + film?.original_title,
                     Toast.LENGTH_SHORT
                 ).show()
                 finish()
             } else {
                 Toast.makeText(
-                    this@Detail,
-                    "Failed Add Movies",
+                    this@DetailTV,
+                    "Failed Add Tv",
                     Toast.LENGTH_SHORT
                 ).show()
             }
@@ -156,21 +136,21 @@ class Detail : AppCompatActivity() {
                 .setMessage(dialogMessage)
                 .setCancelable(false)
                 .setPositiveButton("Yes") { dialog, id ->
-                    val result = contentResolver.delete(uriWithId, null, null).toLong()
+                    val result = mv.deleteById(film?.id.toString()).toLong()
                     if (result > 0) {
                         val intent = Intent()
-                        intent.putExtra(EXTRA_POSITION, movieId)
-                        setResult(RESULT_DELETE, intent)
+                        intent.putExtra(DetailTV.EXTRA_POSITION, movieId)
+                        setResult(DetailTV.RESULT_DELETE, intent)
                         Toast.makeText(
-                            this@Detail,
+                            this@DetailTV,
                             "Deleted: $movieTitle",
                             Toast.LENGTH_SHORT
                         ).show()
                         finish()
                     } else {
                         Toast.makeText(
-                            this@Detail,
-                            "Failed Deleted Movies",
+                            this@DetailTV,
+                            "Failed Deleted tv",
                             Toast.LENGTH_SHORT
                         ).show()
                     }
@@ -181,20 +161,9 @@ class Detail : AppCompatActivity() {
         }
 //        reloadWidget()
         return super.onOptionsItemSelected(item)
-
     }
-
-
-
-//
-
-
-
-
-
-
-
 }
+
 
 
 

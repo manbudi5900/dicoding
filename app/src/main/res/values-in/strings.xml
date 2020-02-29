@@ -6,6 +6,6 @@
     <string name="movies1" tools:ignore="MissingTranslation">Film</string>
     <string name="tv1" tools:ignore="MissingTranslation">Acara Tv</string>
     <string name="language" tools:ignore="MissingTranslation">id-ID</string>
-    <string name="fmovies1" tools:ignore="MissingTranslation">Favorite Film</string>
-    <string name="ftv1" tools:ignore="MissingTranslation">Favorite Tv Show</string>
+    <string name="fmovies1" tools:ignore="MissingTranslation">Film Favorit</string>
+    <string name="ftv1" tools:ignore="MissingTranslation">Acara Tv Favorite</string>
 </resources>

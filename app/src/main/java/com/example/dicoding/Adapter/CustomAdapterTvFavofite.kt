@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dicoding.Detail
+import com.example.dicoding.DetailTV
 import com.example.dicoding.Model.Film
 import com.example.dicoding.Model.Tv
 import com.example.dicoding.R
@@ -46,9 +47,10 @@ class CustomAdapterTvFavofite(): RecyclerView.Adapter<CustomAdapterTvFavofite.Ho
                 film.get(position).backdrop_path,
                 film.get(position).vote_average
             )
-            val moveWithObjectIntent = Intent(holder.view.context, Detail::class.java)
-            moveWithObjectIntent.putExtra(Detail.EXTRA_PERSON, film)
+            val moveWithObjectIntent = Intent(holder.view.context, DetailTV::class.java)
+            moveWithObjectIntent.putExtra(Detail.EXTRA_POSITION, film)
             moveWithObjectIntent.putExtra("jenis", "tv")
+
             holder.view.context.startActivity(moveWithObjectIntent)
         }
 

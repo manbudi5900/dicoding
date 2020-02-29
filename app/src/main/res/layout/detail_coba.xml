@@ -10,7 +10,7 @@
     android:layout_height="wrap_content">
         <ImageView
             android:id="@+id/imageView2"
-            android:layout_width="402dp"
+            android:layout_width="match_parent"
             android:layout_height="169dp"
             android:scaleType="fitXY"
             app:layout_constraintEnd_toEndOf="parent"
@@ -40,6 +40,7 @@
             android:id="@+id/imageView3"
             android:layout_width="105dp"
             android:layout_height="124dp"
+            app:layout_constraintCircleRadius="10dp"
             android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toTopOf="@+id/personil"
             app:layout_constraintEnd_toStartOf="@+id/textView10"
@@ -175,21 +176,7 @@
             app:layout_constraintTop_toBottomOf="@+id/textView8"
             app:layout_constraintVertical_bias="1.0" />
 
-        <Button
-            android:id="@+id/like"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="79dp"
-            android:layout_marginLeft="79dp"
-            android:layout_marginEnd="4dp"
-            android:layout_marginRight="4dp"
-            android:layout_marginBottom="24dp"
-            android:text="Like"
-            app:layout_constraintBottom_toTopOf="@+id/personil"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/textView8"
-            app:layout_constraintTop_toBottomOf="@+id/imageView2"
-            tools:ignore="MissingConstraints" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

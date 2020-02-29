@@ -4,9 +4,8 @@ import android.content.ContentValues
 import android.os.Bundle
 import android.os.Handler
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -33,6 +32,7 @@ class Tv_Show : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         ShowProgressDialog(true)
+        setHasOptionsMenu(true)
         movieAdapter = CustomAdapterTv()
         movieAdapter.notifyDataSetChanged()
         mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
@@ -58,6 +58,82 @@ class Tv_Show : Fragment() {
         else{
             progress_bar.visibility= View.GONE
         }
+    }
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.search, menu)
+        val searchItem : MenuItem = menu.findItem(R.id.searchMenu)
+        val searchView : SearchView = searchItem.actionView as SearchView
+
+        searchQuery(searchView)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+
+
+
+
+    private fun searchQuery(searchView: SearchView) {
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                if (query.isNullOrEmpty()) {
+                    return false
+                }else{
+                    movieAdapter = CustomAdapterTv()
+                    movieAdapter.notifyDataSetChanged()
+                    mainViewModel = ViewModelProvider(this@Tv_Show, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+                    mainViewModel.setMovies(getString(R.string.language),query.toString())
+                    list.setHasFixedSize(true)
+                    list.layoutManager = LinearLayoutManager(context)
+                    list.adapter = movieAdapter
+                    mainViewModel.getTVShows().observe(this@Tv_Show, Observer { movieItems ->
+                        if(movieItems!=null){
+                            Log.d("kakakakaakkak","he")
+                            movieAdapter.setData(movieItems)
+                            movieAdapter.notifyDataSetChanged()
+                        }
+                    })
+                }
+
+
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                movieAdapter = CustomAdapterTv()
+                movieAdapter.notifyDataSetChanged()
+                mainViewModel = ViewModelProvider(this@Tv_Show, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
+                if (newText != null) {
+                    mainViewModel.setTVShows(getString(R.string.language),newText.toString())
+                    list.setHasFixedSize(true)
+                    list.layoutManager = LinearLayoutManager(context)
+                    list.adapter = movieAdapter
+                    mainViewModel.getTVShows().observe( this@Tv_Show ,Observer { movieItems ->
+                        if(movieItems!=null){
+                            Log.d("kakakakaakkak","he")
+                            movieAdapter.setData(movieItems)
+                            movieAdapter.notifyDataSetChanged()
+                            ShowProgressDialog(false)
+                        }
+                    })
+                }else{
+                    mainViewModel.setTVShows(getString(R.string.language),"")
+                    list.setHasFixedSize(true)
+                    list.layoutManager = LinearLayoutManager(context)
+                    list.adapter = movieAdapter
+                    mainViewModel.getTVShows().observe( this@Tv_Show ,Observer { movieItems ->
+                        if(movieItems!=null){
+                            Log.d("kakakakaakkak","he")
+                            movieAdapter.setData(movieItems)
+                            movieAdapter.notifyDataSetChanged()
+                            ShowProgressDialog(false)
+                        }
+                    })
+                }
+
+
+                return false
+            }
+        })
     }
 
 }

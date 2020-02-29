@@ -6,14 +6,14 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.example.dicoding.Detail
-import com.example.dicoding.Model.Film
+import com.example.dicoding.DetailTV
 import com.example.dicoding.Model.Tv
 import com.example.dicoding.R
 import kotlinx.android.synthetic.main.item.view.*
 
 class CustomAdapterTv(): RecyclerView.Adapter<CustomAdapterTv.Holder>() {
     private val film = ArrayList<Tv>()
+    var film1 : Tv?= null
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): Holder {
         return Holder(LayoutInflater.from(parent.context).inflate(R.layout.item,parent,false))
     }
@@ -38,7 +38,7 @@ class CustomAdapterTv(): RecyclerView.Adapter<CustomAdapterTv.Holder>() {
         film.get(position).vote_average?.toFloat()?.let { holder.view.rt.setRating(it) }
         holder.view.setOnClickListener{
             //            Toast.makeText(holder.view.context, film?.get(position)?.menit, Toast.LENGTH_SHORT).show()
-            val film = Film(
+            film1 = Tv(
                 position,
                 film.get(position).original_title,
                 film.get(position).poster_path,
@@ -47,8 +47,9 @@ class CustomAdapterTv(): RecyclerView.Adapter<CustomAdapterTv.Holder>() {
                 film.get(position).backdrop_path,
                 film.get(position).vote_average
             )
-            val moveWithObjectIntent = Intent(holder.view.context, Detail::class.java)
-            moveWithObjectIntent.putExtra(Detail.EXTRA_PERSON, film)
+            film1= film1 as Tv
+            val moveWithObjectIntent = Intent(holder.view.context, DetailTV::class.java)
+            moveWithObjectIntent.putExtra(DetailTV.OBJECT_TVSHOW, film1)
             moveWithObjectIntent.putExtra("id", position)
             moveWithObjectIntent.putExtra("jenis", "tv")
             holder.view.context.startActivity(moveWithObjectIntent)

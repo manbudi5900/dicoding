@@ -10,5 +10,13 @@
         <item name="colorControlNormal">#00CED1</item>
         <item name="colorControlActivated">#000080</item>
     </style>
+    <style name="MyAlertDialog" parent="Theme.MaterialComponents.Light.Dialog.Alert">
+        <!-- Used for the buttons -->
+        <item name="colorAccent">#00CED1</item>
+        <!-- Used for the title and text -->
+        <item name="android:textColorPrimary">#00CED1</item>
+        <!-- Used for the background -->
+        <item name="android:background">#000080</item>
+    </style>
 
 </resources>

@@ -22,9 +22,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_utama__nav.*
 
 class Utama_Nav : AppCompatActivity() {
-    private var i = 0
-    private val handler = Handler()
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

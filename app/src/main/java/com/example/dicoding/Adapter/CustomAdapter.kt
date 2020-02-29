@@ -60,7 +60,7 @@ class CustomAdapter(): RecyclerView.Adapter<CustomAdapter.Holder>() {
                 film.get(position).vote_average
             )
             val moveWithObjectIntent = Intent(holder.view.context, Detail::class.java)
-            moveWithObjectIntent.putExtra(Detail.EXTRA_PERSON, film)
+            moveWithObjectIntent.putExtra(Detail.EXTRA_POSITION , film)
             moveWithObjectIntent.putExtra("id", position)
             moveWithObjectIntent.putExtra("jenis", "movie")
             holder.view.context.startActivity(moveWithObjectIntent)

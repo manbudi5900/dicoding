@@ -18,4 +18,15 @@ interface APIServices {
     @GET("3/discover/tv")
     fun getTv(@Query("api_key")key:String,
                   @Query("language")lang:String): Call<ResponseTv>
+
+    @GET("3/search/movie")
+    fun getMovies(@Query("api_key")key:String,
+                  @Query("language")lang:String,
+                  @Query("query")query:String): Call<ResponseFilm>
+
+    @GET("3/search/tv")
+    fun getTv(@Query("api_key")key:String,
+              @Query("language")lang:String,
+              @Query("query")query:String): Call<ResponseTv>
+
 }

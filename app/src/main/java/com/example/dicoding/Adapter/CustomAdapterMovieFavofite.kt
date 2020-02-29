@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.dicoding.Detail
 import com.example.dicoding.Model.Film
-import com.example.dicoding.Model.Tv
 import com.example.dicoding.R
 import kotlinx.android.synthetic.main.item.view.*
 
@@ -35,9 +34,9 @@ class CustomAdapterMovieFavofite(): RecyclerView.Adapter<CustomAdapterMovieFavof
             .placeholder(R.color.colorPrimary)
             .error(R.color.colorPrimary)
             .into(holder.view.imgView)
+
         film.get(position).vote_average?.toFloat()?.let { holder.view.rt.setRating(it) }
         holder.view.setOnClickListener{
-            //            Toast.makeText(holder.view.context, film?.get(position)?.menit, Toast.LENGTH_SHORT).show()
             val film = Film(
                 film.get(position).id,
                 film.get(position).original_title,
@@ -48,8 +47,8 @@ class CustomAdapterMovieFavofite(): RecyclerView.Adapter<CustomAdapterMovieFavof
                 film.get(position).vote_average
             )
             val moveWithObjectIntent = Intent(holder.view.context, Detail::class.java)
-            moveWithObjectIntent.putExtra(Detail.EXTRA_PERSON, film)
-            moveWithObjectIntent.putExtra("jenis", "tv")
+            moveWithObjectIntent.putExtra(Detail.EXTRA_POSITION, film)
+            moveWithObjectIntent.putExtra("jenis", "movie")
             holder.view.context.startActivity(moveWithObjectIntent)
         }
 
