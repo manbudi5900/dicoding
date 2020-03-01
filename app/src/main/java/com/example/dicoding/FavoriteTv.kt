@@ -42,6 +42,7 @@ class FavoriteTv : Fragment() {
         super.onActivityCreated(savedInstanceState)
         movieAdapter = CustomAdapterTvFavofite()
         movieAdapter.notifyDataSetChanged()
+        ShowProgressDialog(false)
         list.setHasFixedSize(true)
         list.layoutManager = LinearLayoutManager(this.context)
         list.adapter = movieAdapter

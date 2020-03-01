@@ -12,6 +12,10 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".DetailTV"></activity>
+        <receiver
+            android:name=".notification.NotificationReceiver"
+            android:enabled="true"
+            android:exported="true" />
 
         <provider
             android:name=".db.MovieProvider"
@@ -35,6 +39,7 @@
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <activity android:name=".Detail" />
+        <activity android:name=".notification.setting.NotificationSettingActivity" />
         <activity android:name=".Utama_Nav">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

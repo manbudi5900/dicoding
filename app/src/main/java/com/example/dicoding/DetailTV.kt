@@ -1,5 +1,7 @@
 package com.example.dicoding
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.ContentValues
 import android.content.Intent
 import android.database.ContentObserver
@@ -24,7 +26,7 @@ import kotlinx.android.synthetic.main.detail_coba.*
 
 class DetailTV : AppCompatActivity() {
     var jenis: String? = null
-    var film : Tv?= null
+    var film : Film?= null
     var film1 : Tv?= null
     var itm : Menu?=null
     var id : Int?=null
@@ -47,7 +49,7 @@ class DetailTV : AppCompatActivity() {
         setContentView(R.layout.detail_coba)
         mv = TvshowsHelper.getInstance(applicationContext)
         mv.open()
-        film = intent.getParcelableExtra(OBJECT_TVSHOW) as Tv
+        film = intent.getParcelableExtra(OBJECT_TVSHOW)
         id = film?.id
         jenis = intent.getStringExtra("jenis")
 //        Log.d("id",id.toString())
@@ -159,8 +161,19 @@ class DetailTV : AppCompatActivity() {
             val alertDialog = alertDialogBuilder.create()
             alertDialog.show()
         }
-//        reloadWidget()
+        reloadWidget()
         return super.onOptionsItemSelected(item)
+    }
+    private fun reloadWidget() {
+        val appWidgetManager =
+            AppWidgetManager.getInstance(applicationContext)
+        val thisAppWidget = ComponentName(
+            applicationContext.packageName,
+            MoviesFavoriteWidget::class.java.name
+        )
+        val appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget)
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view)
+
     }
 }
 

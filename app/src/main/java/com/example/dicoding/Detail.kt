@@ -1,5 +1,7 @@
 package com.example.dicoding
 
+import android.appwidget.AppWidgetManager
+import android.content.ComponentName
 import android.content.ContentValues
 import android.content.Intent
 import android.database.ContentObserver
@@ -177,23 +179,24 @@ class Detail : AppCompatActivity() {
                 }
                 .setNegativeButton("No") { dialog, id -> dialog.cancel() }
             val alertDialog = alertDialogBuilder.create()
+            reloadWidget()
             alertDialog.show()
         }
-//        reloadWidget()
+        reloadWidget()
         return super.onOptionsItemSelected(item)
 
     }
+    private fun reloadWidget() {
+        val appWidgetManager =
+            AppWidgetManager.getInstance(applicationContext)
+        val thisAppWidget = ComponentName(
+            applicationContext.packageName,
+            MoviesFavoriteWidget::class.java.name
+        )
+        val appWidgetIds = appWidgetManager.getAppWidgetIds(thisAppWidget)
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view)
 
-
-
-//
-
-
-
-
-
-
-
+    }
 }
 
 

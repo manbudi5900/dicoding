@@ -18,6 +18,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.bumptech.glide.Glide
 import com.example.dicoding.Adapter.SectionsPagerAdapter
+import com.example.dicoding.notification.setting.NotificationSettingActivity
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_utama__nav.*
 
@@ -43,6 +44,9 @@ class Utama_Nav : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_change_settings) {
             val mIntent = Intent(Settings.ACTION_LOCALE_SETTINGS)
+            startActivity(mIntent)
+        }else{
+            val mIntent = Intent(this.applicationContext,NotificationSettingActivity::class.java)
             startActivity(mIntent)
         }
         return super.onOptionsItemSelected(item)
