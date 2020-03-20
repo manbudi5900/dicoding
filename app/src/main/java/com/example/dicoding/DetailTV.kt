@@ -4,12 +4,10 @@ import android.appwidget.AppWidgetManager
 import android.content.ComponentName
 import android.content.ContentValues
 import android.content.Intent
-import android.database.ContentObserver
+
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
 import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
@@ -25,23 +23,15 @@ import com.example.dicoding.db.TvshowsHelper
 import kotlinx.android.synthetic.main.detail_coba.*
 
 class DetailTV : AppCompatActivity() {
-    var jenis: String? = null
+
     var film : Film?= null
     var film1 : Tv?= null
-    var itm : Menu?=null
-    var id : Int?=null
     private lateinit var mv: TvshowsHelper
-    private lateinit var uriWithId: Uri
     companion object {
         const val OBJECT_TVSHOW = "object_tv"
         const val EXTRA_POSITION = "extra_position"
-        const val REQUEST_ADD = 100
         const val RESULT_ADD = 101
-        const val REQUEST_UPDATE = 200
-        const val RESULT_UPDATE = 201
         const val RESULT_DELETE = 301
-        const val ALERT_DIALOG_CLOSE = 10
-        const val ALERT_DIALOG_DELETE = 20
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -50,9 +40,6 @@ class DetailTV : AppCompatActivity() {
         mv = TvshowsHelper.getInstance(applicationContext)
         mv.open()
         film = intent.getParcelableExtra(OBJECT_TVSHOW)
-        id = film?.id
-        jenis = intent.getStringExtra("jenis")
-//        Log.d("id",id.toString())
         Glide.with(this)
             .load("https://image.tmdb.org/t/p/original"+ film?.backdrop_path.toString())
             .into(imageView2)
@@ -69,7 +56,7 @@ class DetailTV : AppCompatActivity() {
         rate.setText(film?.vote_average.toString())
         sinopsis.setText(resources.getString(R.string.sinopsis))
         film1 = loadDBSync(film?.id.toString())
-        Toast.makeText(this,id.toString(), Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,film?.id.toString(), Toast.LENGTH_SHORT).show()
     }
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.love, menu)
@@ -77,7 +64,7 @@ class DetailTV : AppCompatActivity() {
 
     }
     private fun loadDBSync(id: String?): Tv {
-        val cursor = mv.queryById(id)
+        val cursor = mv.queryById(id.toString())
 
         return MappingTvshowsHelper.mapCursorToList(cursor)
     }

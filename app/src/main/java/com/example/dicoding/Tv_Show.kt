@@ -1,27 +1,17 @@
 package com.example.dicoding
 
-import android.content.ContentValues
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.*
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.dicoding.Adapter.CustomAdapter
 import com.example.dicoding.Adapter.CustomAdapterTv
-import com.example.dicoding.Api.APIServices
-import com.example.dicoding.Api.DataRepository
-import com.example.dicoding.Model.Film
 import com.example.dicoding.Model.MainViewModel
-import com.example.dicoding.Model.ResponseFilm
 import kotlinx.android.synthetic.main.coba.*
-import retrofit2.Call
-import retrofit2.Response
+
 
 class Tv_Show : Fragment() {
     private lateinit var mainViewModel: MainViewModel
@@ -67,11 +57,6 @@ class Tv_Show : Fragment() {
         searchQuery(searchView)
         super.onCreateOptionsMenu(menu, inflater)
     }
-
-
-
-
-
     private fun searchQuery(searchView: SearchView) {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -93,11 +78,8 @@ class Tv_Show : Fragment() {
                         }
                     })
                 }
-
-
                 return true
             }
-
             override fun onQueryTextChange(newText: String?): Boolean {
                 movieAdapter = CustomAdapterTv()
                 movieAdapter.notifyDataSetChanged()
@@ -129,8 +111,6 @@ class Tv_Show : Fragment() {
                         }
                     })
                 }
-
-
                 return false
             }
         })

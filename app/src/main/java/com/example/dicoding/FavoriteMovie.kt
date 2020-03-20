@@ -36,10 +36,7 @@ class FavoriteMovie : Fragment() {
         ShowProgressDialog(false)
         movieAdapter = CustomAdapterMovieFavofite()
         movieAdapter.notifyDataSetChanged()
-//        databaseHelper = this.context?.let { DatabaseTV(it) }!!
         mainViewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory()).get(MainViewModel::class.java)
-//        TvArrayList = databaseHelper!!.getAllMovie
-//        mainViewModel.setMovies(TvArrayList)
         list.setHasFixedSize(true)
         list.layoutManager = LinearLayoutManager(this.context)
         list.adapter = movieAdapter
@@ -64,7 +61,7 @@ class FavoriteMovie : Fragment() {
             val movies = savedInstanceState.getParcelableArrayList<Film>(EXTRA_STATE)
             if (movies != null) {
                 movieAdapter.setData(movies)
-//                movieAdapter.notifyDataSetChanged()
+
             }
         }
     }
@@ -78,8 +75,6 @@ class FavoriteMovie : Fragment() {
             val movies = deferredMovies.await()
             Log.d("sa",movies.toString())
             movieAdapter.setData(movies)
-
-//            ShowProgressDialog(false)
         }
 
     }

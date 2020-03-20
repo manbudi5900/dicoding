@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_change_settings">Ubah Bahasa</string>
+    <string name="sinopsis" tools:ignore="MissingTranslation">Sinopsis</string>
+    <string name="job" translatable="false">Sutradara</string>
+    <string name="movies1" tools:ignore="MissingTranslation">Film</string>
+    <string name="tv1" tools:ignore="MissingTranslation">Acara Tv</string>
+    <string name="language" tools:ignore="MissingTranslation">id-ID</string>
+    <string name="fmovies1" tools:ignore="MissingTranslation">Film Favorit</string>
+    <string name="ftv1" tools:ignore="MissingTranslation">Acara Tv Favorite</string>
+    <string name="release_reminder_message">Hey!! Periksa Film Terbaru Hari Ini</string>
+    <string name="daily_reminder_desc">Harian</string>
+    <string name="daily_reminder_message">Kami memiliki koleksi baru, cek aplikasi </string>
+    <string name="title_notification_setting">Pemberitahuan</string>
+    <string name="daily_switch">harian_tombol</string>
+    <string name="release_switch">terbaru_tombol</string>
+    <string-array name="setting_menu">
+    <item>Bahasa</item>
+    <item>Pemberitahuan</item>
+    </string-array>
+    <string name="setting_menu">Menu Pengaturan</string>
+    <string name="release_reminder_desc">Terbaru hari ini</string>
+</resources>

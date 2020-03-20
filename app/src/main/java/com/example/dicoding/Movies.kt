@@ -8,32 +8,19 @@ import android.os.Bundle
 import android.os.Handler
 import android.provider.Settings
 import android.provider.UserDictionary.Words.APP_ID
-
 import android.util.Log
 import android.view.*
 import android.view.textclassifier.TextLanguage
 import androidx.appcompat.widget.SearchView
-
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
 import com.example.dicoding.Adapter.CustomAdapter
-import com.example.dicoding.Api.APIServices
-import com.example.dicoding.Api.DataRepository
 import com.example.dicoding.Model.Film
-import com.example.dicoding.Model.ResponseFilm
-import com.loopj.android.http.AsyncHttpClient
-import com.loopj.android.http.AsyncHttpResponseHandler
-import cz.msebera.android.httpclient.Header
 import kotlinx.android.synthetic.main.coba.*
-import retrofit2.Call
-import retrofit2.Response
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.dicoding.Model.MainViewModel
-import retrofit2.Callback
 
 
 class Movies : Fragment() {
@@ -93,10 +80,6 @@ class Movies : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-
-
-
-
     private fun searchQuery(searchView: SearchView) {
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
@@ -154,8 +137,6 @@ class Movies : Fragment() {
                         }
                     })
                 }
-
-
                 return false
             }
         })

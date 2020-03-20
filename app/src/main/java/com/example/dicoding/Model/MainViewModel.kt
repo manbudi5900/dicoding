@@ -17,7 +17,7 @@ class MainViewModel: ViewModel() {
 
     fun setMovies(lang: String){
         val dataMovie = ArrayList<Film>()
-        val call : Call<ResponseFilm> = apiInterface.getMovies("7b3ad7574fb018c27ba6b1ec6da5c6e0",lang)
+        val call : Call<ResponseFilm> = apiInterface.getMovies("7b3ad7574fb018c27ba6b1ec6da5c6e0",lang,"a")
         call.enqueue(object : retrofit2.Callback<ResponseFilm> {
             override fun onFailure(call: Call<ResponseFilm>, t: Throwable) {
                 Log.d("${ContentValues.TAG}", "Gagal Fetch Popular Movie")
@@ -25,6 +25,7 @@ class MainViewModel: ViewModel() {
             override fun onResponse(call: Call<ResponseFilm>, response: Response<ResponseFilm>) {
                 if (response != null) {
                     val data = response.body()
+                    Log.d("${ContentValues.TAG}", data?.results.toString())
                     dataMovie.addAll(data!!.results)
                     listMovie.postValue(dataMovie)
                 }
@@ -55,7 +56,7 @@ class MainViewModel: ViewModel() {
 
     fun setTVShows(lang: String){
         val dataTv = ArrayList<Tv>()
-        val call : Call<ResponseTv> = apiInterface.getTv("7b3ad7574fb018c27ba6b1ec6da5c6e0",lang)
+        val call : Call<ResponseTv> = apiInterface.getTv("7b3ad7574fb018c27ba6b1ec6da5c6e0",lang,"a")
         call.enqueue(object : retrofit2.Callback<ResponseTv> {
             override fun onFailure(call: Call<ResponseTv>, t: Throwable) {
                 Log.d("${ContentValues.TAG}", "Gagal Fetch Popular Movie")

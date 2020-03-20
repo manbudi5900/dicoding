@@ -9,13 +9,11 @@ import android.os.Bundle
 import android.widget.RemoteViews
 import android.widget.RemoteViewsService
 import com.bumptech.glide.Glide
-import com.example.dicoding.Model.Film
 import com.example.dicoding.db.DatabaseContract.MoviesColumn.Companion.CONTENT_URI
 import java.util.concurrent.ExecutionException
 
 class StackRemoteViewsFactory(private val mContext: Context) : RemoteViewsService.RemoteViewsFactory {
-    private val mWidgetItems = ArrayList<Bitmap>()
-    private lateinit var  TvArrayList: ArrayList<Film>
+
     private var list: Cursor? = null
 
     override fun onCreate() {

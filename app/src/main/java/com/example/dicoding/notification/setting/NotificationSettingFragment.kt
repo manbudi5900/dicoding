@@ -5,7 +5,8 @@ import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.content.SharedPreferences
-import androidx.fragment.app.Fragment
+import android.util.Log
+
 import androidx.fragment.app.FragmentActivity
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
@@ -50,6 +51,7 @@ class NotificationSettingFragment :
         RELEASE = resources.getString(R.string.release_switch)
 
         dailySwitch = findPreference<SwitchPreference>(DAILY) as SwitchPreference
+        Log.d("",dailySwitch.toString())
         releaseSwitch = findPreference<SwitchPreference>(RELEASE) as SwitchPreference
     }
 

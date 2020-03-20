@@ -17,7 +17,7 @@
             app:layout_constraintHorizontal_bias="0.476"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@drawable/back" />
+            tools:srcCompat="@drawable/search" />
 
 
         <androidx.appcompat.widget.AppCompatRatingBar
@@ -45,7 +45,7 @@
             app:layout_constraintBottom_toTopOf="@+id/personil"
             app:layout_constraintEnd_toStartOf="@+id/textView10"
             app:layout_constraintStart_toStartOf="parent"
-            tools:srcCompat="@drawable/sa" />
+            tools:srcCompat="@drawable/search" />
 
         <TextView
             android:id="@+id/textView7"

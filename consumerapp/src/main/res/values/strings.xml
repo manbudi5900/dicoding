@@ -1,0 +1,26 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name">consumerapp</string>
+    <string name="action_change_settings" tools:ignore="MissingTranslation">Ubah Bahasa</string>
+    <string name="job" translatable="false">Sutradara</string>
+    <string name="movies1" tools:ignore="MissingTranslation">Film</string>
+    <string name="sinopsis" tools:ignore="MissingTranslation">Sinopsis</string>
+    <string name="tv1" tools:ignore="MissingTranslation">Tv Show</string>
+    <string name="language" tools:ignore="MissingTranslation">id-ID</string>
+    <string name="fmovies1" tools:ignore="MissingTranslation">Film Favorit</string>
+    <string name="ftv1" tools:ignore="MissingTranslation">Acara Tv Favorit</string>
+    <string name="appwidget_text" translatable="false">EXAMPLE</string>
+    <string name="add_widget" translatable="false">Add widget</string>
+
+    <string name="daily_reminder_message">Kami memiliki koleksi baru, cek aplikasi </string>
+    <string name="title_notification_setting">Pemberitahuan</string>
+    <string name="daily_reminder_desc" tools:ignore="MissingTranslation">Harian</string>
+    <string name="release_reminder_message" tools:ignore="MissingTranslation">Hey!! Periksa Film Terbaru Hari Ini</string>
+    <string name="daily_switch">harian_tombol</string>
+    <string name="release_switch">terbaru_tombol</string>
+    <string-array name="setting_menu">
+        <item>Bahasa</item>
+        <item>Pemberitahuan</item>
+    </string-array>
+    <string name="setting_menu">Menu Pengaturan</string>
+    <string name="release_reminder_desc">Terbaru hari ini</string>
+</resources>

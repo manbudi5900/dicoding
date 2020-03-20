@@ -37,9 +37,8 @@ class CustomAdapterTv(): RecyclerView.Adapter<CustomAdapterTv.Holder>() {
 
         film.get(position).vote_average?.toFloat()?.let { holder.view.rt.setRating(it) }
         holder.view.setOnClickListener{
-            //            Toast.makeText(holder.view.context, film?.get(position)?.menit, Toast.LENGTH_SHORT).show()
             film1 = Tv(
-                position,
+                film.get(position).id,
                 film.get(position).original_title,
                 film.get(position).poster_path,
                 film.get(position).overview,
@@ -47,11 +46,8 @@ class CustomAdapterTv(): RecyclerView.Adapter<CustomAdapterTv.Holder>() {
                 film.get(position).backdrop_path,
                 film.get(position).vote_average
             )
-            film1= film1 as Tv
             val moveWithObjectIntent = Intent(holder.view.context, DetailTV::class.java)
             moveWithObjectIntent.putExtra(DetailTV.OBJECT_TVSHOW, film1)
-            moveWithObjectIntent.putExtra("id", position)
-            moveWithObjectIntent.putExtra("jenis", "tv")
             holder.view.context.startActivity(moveWithObjectIntent)
         }
 

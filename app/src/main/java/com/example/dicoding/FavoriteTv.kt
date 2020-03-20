@@ -1,23 +1,15 @@
 package com.example.dicoding
 
-import android.database.ContentObserver
+
 import android.os.Bundle
-import android.os.Handler
-import android.os.HandlerThread
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.dicoding.Adapter.CustomAdapterTvFavofite
-import com.example.dicoding.Model.MainViewModel
 import com.example.dicoding.Model.Tv
-import com.example.dicoding.db.DatabaseContract
-import com.example.dicoding.db.DatabaseContract.MoviesColumn.Companion.CONTENT_URI
-import com.example.dicoding.db.MappingMoviesHelper
 import com.example.dicoding.db.MappingTvshowsHelper
 import com.example.dicoding.db.TvshowsHelper
 import kotlinx.android.synthetic.main.coba.*
@@ -28,8 +20,6 @@ import kotlinx.coroutines.launch
 
 class FavoriteTv : Fragment() {
     private lateinit var movieAdapter: CustomAdapterTvFavofite
-    private lateinit var mainViewModel: MainViewModel
-    private lateinit var  TvArrayList: ArrayList<Tv>
     private lateinit var tvshowsHelper: TvshowsHelper
     companion object {
         private const val EXTRA_STATE = "EXTRA_STATE"

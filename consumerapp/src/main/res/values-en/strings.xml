@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="action_change_settings">Setting Language</string>
+    <string name="sinopsis" tools:ignore="MissingTranslation">Synopsis</string>
+    <string name="job">Director</string>
+    <string name="movies1" tools:ignore="MissingTranslation">Movies</string>
+    <string name="tv1" tools:ignore="MissingTranslation">Tv Show</string>
+    <string name="language" tools:ignore="MissingTranslation">en-US</string>
+    <string name="fmovies1" tools:ignore="MissingTranslation">Favorite Movies</string>
+    <string name="ftv1" tools:ignore="MissingTranslation">Favorite Tv Show</string>
+    <string name="release_reminder_message">Hey!! check out what movies release today</string>
+    <string name="daily_reminder_desc">Daily</string>
+    <string name="daily_reminder_message">Do you like movie ? check out our new collection</string>
+    <string name="title_notification_setting">Notification</string>
+    <string name="daily_switch">daily_switch</string>
+    <string name="release_switch">release_switch</string>
+    <string-array name="setting_menu">
+    <item>Language</item>
+    <item>Notification</item>
+    </string-array>
+    <string name="setting_menu">Menu Setting</string>
+<string name="release_reminder_desc">Release Today</string>
+</resources>
